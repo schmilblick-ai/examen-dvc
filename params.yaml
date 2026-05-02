@@ -1,0 +1,13 @@
+# params.yaml
+split:
+  test_size: 0.2
+  random_state: 42
+  target_column: silica_concentrate
+gridsearch:
+  cv: 5
+  scoring: f1_weighted
+  n_jobs: -1
+  param_grid:
+    learning_rate: [0.01, 0.1, 0.3]
+    max_depth: [3, 5, 7]
+    n_estimators: [100, 200, 500]

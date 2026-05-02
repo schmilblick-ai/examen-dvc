@@ -1,0 +1,16 @@
+stages:
+  split:
+    cmd: python src/data/data_split.py
+    deps:
+    - data/raw/raw.csv
+    - src/data/data_split.py
+    outs:
+    - data/processed/X_test.csv
+    - data/processed/X_train.csv
+    - data/processed/y_test.csv
+    - data/processed/y_train.csv
+  normalize:
+    cmd: ' '
+    deps:
+    - data/processed/X_train.csv
+    - src/normalize.py
