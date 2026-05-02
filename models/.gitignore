@@ -1,2 +1,5 @@
 /best_param.pkl
 /trained_model.joblib
+/best_params.pkl
+/trained_model.pkl
+/gbr_preds.csv

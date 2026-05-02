@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import yaml
 
-data = pd.read_csv( 'data/raw_data/raw.csv')
+data = pd.read_csv( 'data/raw/raw.csv')
 with open("params.yaml") as f:
     params = yaml.safe_load(f)["split"]
 

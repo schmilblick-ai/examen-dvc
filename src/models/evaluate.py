@@ -6,8 +6,8 @@ import json
 # Charger ce model entrainé et l'évaluer sur le jeux de test
 # on enregistre aussi predictions et metriques
     
-X_test_scaled = pd.read_csv('data/processed_data/X_test_scaled.csv')
-y_test = pd.read_csv('data/processed_data/y_test.csv')
+X_test_scaled = pd.read_csv('data/processed/X_test_scaled.csv')
+y_test = pd.read_csv('data/processed/y_test.csv')
 
 with open('models/trained_model.pkl', 'rb') as f:
     gbr_model = pickle.load(f)
@@ -18,9 +18,9 @@ y_pred = gbr_model.predict(X_test_scaled)
 # -o Sauvegarde test et predictions
 preds_df = pd.DataFrame({'y_test': y_test.values.ravel(), 'y_pred': y_pred})
 tgtmodelpreds='models/gbr_preds.csv'
-pred_df.to_csv(tgtmodelpreds, index=False)
+preds_df.to_csv(tgtmodelpreds, index=False)
 
-# Calcule des métriques d'évaluation
+# Calcule des métriques d'évaluation avec le mean_squared_error
 mse = mean_squared_error(y_test, y_pred)
 rmse = mse ** 0.5
 r2 = r2_score(y_test, y_pred)
