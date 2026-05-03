@@ -142,8 +142,27 @@ stages:
       size: 1891986
     - path: src/models/evaluate.py
       hash: md5
-      md5: c28b568481600c6dc52d04cb5ca9e123
-      size: 1127
+      md5: 2f51247c54391c5d608a1960ffa9885f
+      size: 1837
+    params:
+      params.yaml:
+        gridsearch:
+          cv: 5
+          scoring: f1_weighted
+          n_jobs: -1
+          param_grid:
+            learning_rate:
+            - 0.01
+            - 0.1
+            - 0.3
+            max_depth:
+            - 3
+            - 5
+            - 7
+            n_estimators:
+            - 100
+            - 200
+            - 500
     outs:
     - path: metrics/scores.json
       hash: md5

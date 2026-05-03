@@ -5,7 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "dagshub>=0.7.0",
     "dvc[s3]>=3.67.1",
+    "mlflow>=1.27.0",
     "pandas>=3.0.2",
     "scikit-learn>=1.8.0",
 ]

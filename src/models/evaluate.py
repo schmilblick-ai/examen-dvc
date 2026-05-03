@@ -3,6 +3,19 @@ import pandas as pd
 import pickle
 import json
 
+import mlflow
+import mlflow.sklearn
+import yaml
+import dagshub
+
+#besoin d'enregistre le modèle, donc avec MlFlow
+
+dagshub.init(repo_owner="schmilblick-ai", repo_name="examen-dvc", mlflow=True)
+mlflow.set_experiment("Concentration Silice")
+
+with open("params.yaml") as f:
+    params = yaml.safe_load(f)
+
 # Charger ce model entrainé et l'évaluer sur le jeux de test
 # on enregistre aussi predictions et metriques
     
@@ -33,3 +46,19 @@ with open(tgtscorefile, 'w') as f:
 print("Les métriques d'évaluation sont :", scores)
 print(f"Predictions sauveté {tgtmodelpreds}")
 print(f"Scores à la sauvette dans {tgtscorefile}")
+
+#Enregistrement du modèle
+with mlflow.start_run():
+    # params pour traçabilité
+    mlflow.log_params(params["gridsearch"])
+
+    # métriques
+    for k,v in scores.items():
+        mlflow.log_metric(f"{k} score", v)
+    
+    # enregistrement du modèle
+    mlflow.sklearn.log_model(
+        sk_model=gbr_model,
+        artifact_path="model",
+        registered_model_name="concentration_silice"
+    )
